@@ -72,7 +72,8 @@ class TransporteController extends Controller
         $transporte= Transporte::findOrFail($id);
         return $transporte->conductor;
     }
-    public function destroy(Transporte $transporte){
+    public function destroy($id){
+        $transporte= Transporte::findOrFail($id);
         $transporte->delete();
         return $transporte;
     }

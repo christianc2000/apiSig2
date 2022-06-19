@@ -21,8 +21,7 @@ use Illuminate\Support\Facades\Route;
 Route::apiResource('register',RegisterController::class)->names('api.v1.register');
 
 /*Usuario */
-Route::get('user',[UserController::class,'index'])->name('api.v1.user.index');
-Route::post('user',[UserController::class,'store'])->name('api.v1.user.store');
+Route::apiResource('user',UserController::class)->names('api.v1.user');
 /*Transporte */
 /*Route::get('transporte',[TransporteController::class,'index'])->name('api.v1.user.index');
 Route::post('transporte',[TransporteController::class,'store'])->name('api.v1.transporte.store');
@@ -30,5 +29,7 @@ Route::get('transporte/{transporte}',[TransporteController::class,'show'])->name
 Route::put('transporte/{transporte}',[TransporteController::class,'update'])->name('api.v1.transporte.update');
 Route::delete('transporte/{transporte}',[TransporteController::class,'destroy'])->name('api.v1.transporte.delete');
 */
+/*Transporte*/
 Route::apiResource('transporte',TransporteController::class)->names('api.v1.tranposte');
-Route::post('category_licencia',[CategoryLicenciaController::class,'store'])->name('api.v1.category_licencia');
+/*Category Licencia*/
+Route::apiResource('category_licencia',CategoryLicenciaController::class)->names('api.v1.category_licencia');

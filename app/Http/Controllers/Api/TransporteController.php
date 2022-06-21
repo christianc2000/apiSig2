@@ -70,7 +70,7 @@ class TransporteController extends Controller
     }
     public function show($id){
         $transporte= Transporte::findOrFail($id);
-        return $transporte->conductor;
+        return $transporte;
     }
     public function destroy($id){
         $transporte= Transporte::findOrFail($id);

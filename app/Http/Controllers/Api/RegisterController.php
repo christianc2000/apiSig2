@@ -13,22 +13,26 @@ class RegisterController extends Controller
 {
     public function index()
     {
-        return Conductor::included()->filter()->sort()->get();
+        return Conductor::included()
+        ->filter()
+        ->sort()
+        ->paginate();
     }
     public function store(Request $request)
     {
+        return $request;
         $request->validate([
             'ci' => 'required|string|max:10|unique:conductors',
             'names' => 'required|string|max:30|unique:conductors',
             'lastname' => 'required|string|max:30|unique:conductors',
-            'date' => 'require',
+            'date' => 'required',
             'sex' => 'required|max:1',
             'phone' => 'required|int',
             'mail' => 'required|string|email|max:255|unique:conductors',
             'category_licencia_id' => 'required|string|max:12',
             'user_id' => 'required'
         ]);
-
+       return $request;
         /*Crea al conductor */
         $conductor = new Conductor();
         $conductor->ci = $request->ci;

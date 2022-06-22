@@ -24,6 +24,7 @@ class TransporteResource extends JsonResource
             'fecha_asignacion' => $this->fecha_asignacion,
             'fecha_baja' => $this->fecha_baja,
             'conductor_id' => $this->conductor_id
+         
         ];
     }
 }

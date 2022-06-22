@@ -13,10 +13,7 @@ use Illuminate\Support\Facades\Validator;
 
 class RegisterController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth:api')->except(['index', 'show']);
-    }
+    
     public function index()
     {
         $conductor = Conductor::included()

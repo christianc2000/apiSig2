@@ -17,6 +17,7 @@ class TransporteController extends Controller
     }
     public function store(Request $request)
     {
+      
         $request->validate([
             'placa' => 'required|string|max:15',
             'modelo' => 'required',
@@ -28,7 +29,7 @@ class TransporteController extends Controller
             'conductor_id' => 'required|exists:conductors,id'
 
         ]);
-
+        
         $transporte = new Transporte();
 
         $transporte->placa = $request->placa;
@@ -40,7 +41,7 @@ class TransporteController extends Controller
         $transporte->fecha_baja = $request->fecha_baja;
         $transporte->conductor_id = $request->conductor_id;
         $transporte->save();
-
+        return $transporte;
         return TransporteResource::collection($transporte);
     }
     public function update(Request $request, Transporte $transporte)

@@ -33,11 +33,12 @@ class RegisterController extends Controller
             'sex' => 'required|max:1',
             'phone' => 'required|int',
             'mail' => 'required|string|email|max:255|unique:conductors',
-            'category_licencia_id' => 'required|string|max:12|exists:category_licencias,id'
+            'category_licencia_id' => 'required|string|max:12|exists:category_licencias,id',
+            'user_id'=>'required|string|exists:users,id'
         ]);
-        $user = auth()->user();
-   
-        $data['user_id'] = $user->id;
+        //$user = auth()->user();
+       
+        //$data['user_id'] = $user->id;
         /*Crea al conductor */
         $conductor = new Conductor();
         $conductor->ci = $request->ci;
@@ -48,7 +49,7 @@ class RegisterController extends Controller
         $conductor->phone = $request->phone;
         $conductor->mail = $request->mail;
         $conductor->category_licencia_id = $request->category_licencia_id;
-        $conductor->user_id = $user->id;
+        $conductor->user_id = $request->user_id;
 
         $conductor->save();
       

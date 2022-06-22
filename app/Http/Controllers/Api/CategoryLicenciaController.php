@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\CategoryResource;
 use App\Models\Category_licencia;
 use Illuminate\Http\Request;
 
@@ -10,7 +11,11 @@ class CategoryLicenciaController extends Controller
 {
     public function index()
     {
-        return Category_licencia::all();
+        $category= Category_licencia::included()
+        ->filter()
+        ->sort()
+        ->paginate();
+        return CategoryResource::collection($category);
     }
     public function store(Request $request)
     {
@@ -23,7 +28,7 @@ class CategoryLicenciaController extends Controller
 
         $cl->save();
 
-        return response($cl, 200);
+        CategoryResource::make($cl);
     }
     public function update(Request $request, $id)
     {
@@ -36,17 +41,17 @@ class CategoryLicenciaController extends Controller
 
         $cl->save();
 
-        return response($cl, 200);
+        return CategoryResource::make($cl);
     }
     public function show($id)
     {
-        $cl = Category_licencia::findOrFail($id);
-        return $cl;
+        $cl = Category_licencia::included()->findOrFail($id);
+        return CategoryResource::make($cl);
     }
     public function destroy($id)
     {
         $cl = Category_licencia::findOrFail($id);
         $cl->delete();
-        return $cl;
+        return CategoryResource::make($cl);
     }
 }

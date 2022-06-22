@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\UserResource;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -11,7 +12,11 @@ class UserController extends Controller
 {
     public function index()
     {
-        return User::all();
+        $user=User::included()
+        ->filter()
+        ->sort()
+        ->paginate();
+        return UserResource::make($user);
     }
     public function store(Request $request)
     {
@@ -30,8 +35,8 @@ class UserController extends Controller
     }
 
     public function show($id){
-        $user = User::findOrFail($id);
-        return $user;
+        $user = User::included()->findOrFail($id);
+        return UserResource::make($user);
     }
     public function update(Request $request,$id){
         $request->validate([

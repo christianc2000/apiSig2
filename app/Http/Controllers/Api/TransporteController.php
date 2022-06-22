@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\CategoryResource;
+use App\Http\Resources\TransporteResource;
 use App\Models\Transporte;
 use Illuminate\Http\Request;
 
@@ -10,7 +12,8 @@ class TransporteController extends Controller
 {
     public function index()
     {
-        return Transporte::all();
+        $transporte=Transporte::paginate()->filter()->sort();
+        return TransporteResource::collection($transporte);
     }
     public function store(Request $request)
     {
@@ -22,7 +25,7 @@ class TransporteController extends Controller
             'numero_interno' => 'required',
             'fecha_asignacion' => 'required',
             'fecha_baja' => 'required',
-            'conductor_id' => 'required'
+            'conductor_id' => 'required|exists:conductors,id'
 
         ]);
 
@@ -38,7 +41,7 @@ class TransporteController extends Controller
         $transporte->conductor_id = $request->conductor_id;
         $transporte->save();
 
-        return response($transporte, 200);
+        return TransporteResource::collection($transporte);
     }
     public function update(Request $request, Transporte $transporte)
     {
@@ -50,11 +53,11 @@ class TransporteController extends Controller
             'numero_interno' => 'required',
             'fecha_asignacion' => 'required',
             'fecha_baja' => 'required',
-            'conductor_id' => 'required'
+            'conductor_id' => 'required|exist:conductors,id'
 
         ]);
-       
-      
+
+
 
         $transporte->placa = $request->placa;
         $transporte->modelo = $request->modelo;
@@ -66,15 +69,18 @@ class TransporteController extends Controller
         $transporte->conductor_id = $request->conductor_id;
         $transporte->save();
 
-        return response($transporte, 200);
+        return TransporteResource::collection($transporte);
     }
-    public function show($id){
-        $transporte= Transporte::findOrFail($id);
-        return $transporte;
+    public function show($id)
+    {
+        $transporte = Transporte::findOrFail($id);
+
+        return TransporteResource::make($transporte);
     }
-    public function destroy($id){
-        $transporte= Transporte::findOrFail($id);
+    public function destroy($id)
+    {
+        $transporte = Transporte::findOrFail($id);
         $transporte->delete();
-        return $transporte;
+        return TransporteResource::collection($transporte);
     }
 }

@@ -27,7 +27,7 @@ class RegisterController extends Controller
     }
     public function store(Request $request)
     {
-
+     
         $data = $request->validate([
             'ci' => 'required|string|max:10|unique:conductors',
             'names' => 'required|string|max:30',
@@ -39,6 +39,7 @@ class RegisterController extends Controller
             'category_licencia_id' => 'required|string|max:12|exists:category_licencias,id'
         ]);
         $user = auth()->user();
+   
         $data['user_id'] = $user->id;
         /*Crea al conductor */
         $conductor = new Conductor();
@@ -50,10 +51,10 @@ class RegisterController extends Controller
         $conductor->phone = $request->phone;
         $conductor->mail = $request->mail;
         $conductor->category_licencia_id = $request->category_licencia_id;
-        $conductor->user_id = $user->user_id;
+        $conductor->user_id = $user->id;
 
         $conductor->save();
-        return $conductor;
+      
         return RegisterResource::make($conductor);
     }
     public function update(Request $request, $id)

@@ -3,10 +3,10 @@
 use App\Http\Controllers\Api\RegisterController;
 use App\Http\Controllers\Api\TransporteController;
 use App\Http\Controllers\Api\CategoryLicenciaController;
-use App\Http\Controllers\Api\UserController;
+use App\Http\Controllers\Api\Auth\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\Api\Auth\LoginController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -17,7 +17,10 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+/*Login */
+Route::post('Login',[LoginController::class,'store']);
 /*Registro de Conductor */
+
 Route::apiResource('register',RegisterController::class)->names('api.v1.register');
 
 /*Usuario */

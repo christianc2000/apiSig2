@@ -10,7 +10,7 @@ class Transporte extends Model
 {
     use HasFactory;
     protected $protected = ['id', 'created_at', 'updated_at'];
-    protected $allowIncluded = ['conductors','conductors.transporte'];
+    protected $allowIncluded = ['conductor','conductor.transportes'];
     protected $allowFilter = ['id', 'placa', 'modelo', 'linea', 'cantidad_asiento', 'numero_interno', 'fecha_asignacion', 'fecha_baja', 'conductor_id'];
     protected $allowSort = ['id', 'placa', 'modelo', 'linea', 'cantidad_asiento', 'numero_interno', 'fecha_asignacion', 'fecha_baja', 'conductor_id'];
     //relación inversa de 1 a muchos

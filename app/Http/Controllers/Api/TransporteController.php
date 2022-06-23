@@ -42,7 +42,7 @@ class TransporteController extends Controller
         $transporte->conductor_id = $request->conductor_id;
         $transporte->save();
         return $transporte;
-        return TransporteResource::collection($transporte);
+        return TransporteResource::make($transporte);
     }
     public function update(Request $request, Transporte $transporte)
     {
@@ -70,7 +70,7 @@ class TransporteController extends Controller
         $transporte->conductor_id = $request->conductor_id;
         $transporte->save();
 
-        return TransporteResource::collection($transporte);
+        return TransporteResource::make($transporte);
     }
     public function show($id)
     {
@@ -82,6 +82,6 @@ class TransporteController extends Controller
     {
         $transporte = Transporte::findOrFail($id);
         $transporte->delete();
-        return TransporteResource::collection($transporte);
+        return TransporteResource::make($transporte);
     }
 }

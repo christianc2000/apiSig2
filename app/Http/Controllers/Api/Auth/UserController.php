@@ -42,6 +42,13 @@ class UserController extends Controller
             "msg" => "Alta de usuario exitoso!"
         ]);
     }
+    public function loginget(Request $request)
+    {
+        return response()->json([
+             "status"=>0,
+             "msg"=>"Necesita logguearse"
+        ]);
+    }
     public function login(Request $request)
     {
         $request->validate([

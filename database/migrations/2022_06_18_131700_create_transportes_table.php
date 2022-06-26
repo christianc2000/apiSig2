@@ -21,8 +21,8 @@ return new class extends Migration
             $table->unsignedInteger('cantidad_asiento');
             $table->unsignedInteger('numero_interno');
             $table->date('fecha_asignacion');
-            $table->date('fecha_baja');
-            $table->foreignId('conductor_id')->references('id')->on('conductors');
+            $table->date('fecha_baja')->nullable();
+            $table->foreignId('user_id')->references('id')->on('users');
             $table->timestamps();
         });
     }

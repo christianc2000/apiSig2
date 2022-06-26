@@ -10,51 +10,84 @@ use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
-    public function index()
-    {
-        $user=User::included()
-        ->filter()
-        ->sort()
-        ->paginate();
-        return UserResource::make($user);
-    }
-    public function store(Request $request)
+    public function register(Request $request)
     {
         $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:8|confirmed' 
+            'ci' => 'required|string|unique:users',
+            'name' => 'required',
+            'lastname' => 'required',
+            'fecha_nac' => 'required',
+            'sex' => 'required',
+            'phone' => 'required',
+            'email' => 'required|email|unique:users',
+            'password' => 'required|confirmed',
+            'category_licencia_id' => 'required',
         ]);
-        /*Crea al usuario*/
         $user = new User();
+        $user->ci = $request->ci;
         $user->name = $request->name;
-        $user->email = $request->email;
-        $user->password = bcrypt($request->password);
-        $user->save();
-        return UserResource::make($user);
-    }
-
-    public function show($id){
-        $user = User::included()->findOrFail($id);
-        return UserResource::make($user);
-    }
-    public function update(Request $request,$id){
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:8|confirmed'
-        ]);
-        /*Crea al usuario*/
-        $user = User::findOrFail($id);;
-        $user->name = $request->name;
+        $user->lastname = $request->lastname;
+        $user->fecha_nac = $request->fecha_nac;
+        $user->sex = $request->sex;
+        $user->phone = $request->phone;
         $user->email = $request->email;
         $user->password = Hash::make($request->password);
+        $user->category_licencia_id = $request->category_licencia_id;
+
         $user->save();
-        return response($user, 200);
+
+        // return response(UserResource::make($user));
+        return response()->json([
+            "status" => 1,
+            "msg" => "Alta de usuario exitoso!"
+        ]);
     }
-    public function destroy($id){
-        $user = User::findOrFail($id);
-        $user->delete();
-        return $user;
+    public function login(Request $request)
+    {
+        $request->validate([
+            'ci' => 'required|string',
+            'password' => 'required'
+        ]);
+
+        $user = User::where('ci', '=', $request->ci)->first();
+        if (isset($user->id)) {
+          
+            if (Hash::check($request->password, $user->password)) {
+                //creamos el token
+                $token=$user->createToken("auth_token")->plainTextToken;
+                //si está todo ok
+                return response()->json([
+                    "status" => 1,
+                    "msg" => "¡Usuario logueado exitosamente!",
+                    "access_token"=>$token
+                ]);
+            } else {
+                return response()->json([
+                    "status" => 0,
+                    "msg" => "La password es incorrecta"
+                ],404);
+            }
+        }else{
+            return response()->json([
+                "status" => 0,
+                "msg" => "Usuario no registrado"
+            ],404);
+        }
+    }
+    public function userProfile()
+    {
+        return response()->json([
+            "status" => 0,
+            "msg" => "Acerca del perfil de usuario",
+            "data" => auth()->user()
+        ]);
+    }
+    public function logout()
+    {
+        auth()->user()->tokens()->delete();
+        return response()->json([
+             "status" => 1,
+             "msg"=> "Cierre de Sesión"
+        ]);
     }
 }

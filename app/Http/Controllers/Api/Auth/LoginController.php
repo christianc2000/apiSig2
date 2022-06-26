@@ -7,19 +7,22 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Resources\UserResource;
+use App\Models\Conductor;
 
 class LoginController extends Controller
 {
     public function store(Request $request)
     {
+        return $request;
         $request->validate([
-            'email' => 'required|string|email',
-            'password' => 'required|string'
+          /*  'email' => 'required|string|email',
+            'password' => 'required|string'*/
+            'ci'=>'required|string|unique'
         ]);
-        $user = User::where('email', '=', $request->email)->firstOrFail();
+        $conductor = Conductor::where('ci', '=', $request->ci)->firstOrFail();
 
-        if (Hash::check($request->password, $user->password)) {
-            return UserResource::make($user);
+        if (Hash::check($request->ci, $conductor->ci)) {
+            return UserResource::make($conductor);
         } else {
             return response()->json(['message'=>'These credentials do not match our records'],404);
         }

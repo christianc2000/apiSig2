@@ -18,13 +18,20 @@ use App\Http\Controllers\Api\Auth\LoginController;
 |
 */
 /*Login */
-Route::post('Login',[LoginController::class,'store']);
+//Route::post('Login',[LoginController::class,'store']);
 /*Registro de Conductor */
 
-Route::apiResource('register',RegisterController::class)->names('api.v1.register');
+//Route::apiResource('register',RegisterController::class)->names('api.v1.register');
 
 /*Usuario */
-Route::apiResource('user',UserController::class)->names('api.v1.user');
+//login, register, profile, logout de usuario
+Route::post('register',[UserController::class,'register'])->name('api.v1.register');
+Route::post('login',[UserController::class,'login'])->name('api.v1.login');
+Route::group(['middleware'=>["auth:sanctum"]],function(){
+    Route::get('user-profile',[UserController::class,'userProfile'])->name('api.v1.userProfile');
+    Route::get('logout',[UserController::class,'logout'])->name('api.v1.logout');    
+});
+//Route::apiResource('user',UserController::class)->names('api.v1.user');
 /*Transporte */
 /*Route::get('transporte',[TransporteController::class,'index'])->name('api.v1.user.index');
 Route::post('transporte',[TransporteController::class,'store'])->name('api.v1.transporte.store');

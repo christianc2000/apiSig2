@@ -15,10 +15,10 @@ class Conductor extends Model
     protected $allowFilter = ['id', 'ci', 'names', 'lastname', 'date', 'sex', 'phone', 'mail'];
     protected $allowSort=['id', 'ci', 'names', 'lastname', 'date', 'sex', 'phone', 'mail'];
     //relación inversa de uno a uno
-    public function user()
+    /*public function user()
     {
         return $this->belongsTo(User::class);
-    }
+    }*/
     //relación de 1 a muchos
     public function transportes()
     {

@@ -24,7 +24,7 @@ class TransporteSeeder extends Seeder
                 'numero_interno' => 12,
                 'fecha_asignacion' => "2022-01-03",
                 'fecha_baja' => "2022-06-18",
-                'conductor_id' => 1
+                'user_id' => 1
             ]
         );
 
@@ -37,7 +37,7 @@ class TransporteSeeder extends Seeder
                 'numero_interno' => 15,
                 'fecha_asignacion' => "2021-05-03",
                 'fecha_baja' => "2022-06-18",
-                'conductor_id' => 1
+                'user_id' => 1
             ]
         );
     }

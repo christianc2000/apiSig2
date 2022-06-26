@@ -7,6 +7,7 @@ use App\Http\Resources\CategoryResource;
 use App\Http\Resources\TransporteResource;
 use App\Models\Transporte;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class TransporteController extends Controller
 {
@@ -25,11 +26,9 @@ class TransporteController extends Controller
             'cantidad_asiento' => 'required',
             'numero_interno' => 'required',
             'fecha_asignacion' => 'required',
-            'fecha_baja' => 'required',
-            'conductor_id' => 'required|exists:conductors,id'
-
+           
         ]);
-        
+        $user=Auth()->user();
         $transporte = new Transporte();
 
         $transporte->placa = $request->placa;
@@ -38,8 +37,8 @@ class TransporteController extends Controller
         $transporte->cantidad_asiento = $request->cantidad_asiento;
         $transporte->numero_interno = $request->numero_interno;
         $transporte->fecha_asignacion = $request->fecha_asignacion;
-        $transporte->fecha_baja = $request->fecha_baja;
-        $transporte->conductor_id = $request->conductor_id;
+       // $transporte->fecha_baja = $request->fecha_baja;
+        $transporte->conductor_id = $user->id;
         $transporte->save();
         return $transporte;
         return TransporteResource::make($transporte);
@@ -53,21 +52,21 @@ class TransporteController extends Controller
             'cantidad_asiento' => 'required',
             'numero_interno' => 'required',
             'fecha_asignacion' => 'required',
-            'fecha_baja' => 'required',
-            'conductor_id' => 'required|exist:conductors,id'
+           // 'fecha_baja' => 'required',
+           // 'conductor_id' => 'required|exist:conductors,id'
 
         ]);
 
-
-
+      
+        $user=Auth()->user();
         $transporte->placa = $request->placa;
         $transporte->modelo = $request->modelo;
         $transporte->linea = $request->linea;
         $transporte->cantidad_asiento = $request->cantidad_asiento;
         $transporte->numero_interno = $request->numero_interno;
         $transporte->fecha_asignacion = $request->fecha_asignacion;
-        $transporte->fecha_baja = $request->fecha_baja;
-        $transporte->conductor_id = $request->conductor_id;
+        //$transporte->fecha_baja = $request->fecha_baja;
+        $transporte->conductor_id = $user->id;
         $transporte->save();
 
         return TransporteResource::make($transporte);

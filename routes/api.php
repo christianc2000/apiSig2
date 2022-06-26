@@ -30,6 +30,8 @@ Route::post('login',[UserController::class,'login'])->name('api.v1.login');
 Route::group(['middleware'=>["auth:sanctum"]],function(){
     Route::get('user-profile',[UserController::class,'userProfile'])->name('api.v1.userProfile');
     Route::get('logout',[UserController::class,'logout'])->name('api.v1.logout');    
+    Route::apiResource('transporte',TransporteController::class)->names('api.v1.tranposte');
+    Route::get('category_licencia',[CategoryLicenciaController::class.'index'])->name('api.v1.category_licencia.index');
 });
 //Route::apiResource('user',UserController::class)->names('api.v1.user');
 /*Transporte */
@@ -40,6 +42,6 @@ Route::put('transporte/{transporte}',[TransporteController::class,'update'])->na
 Route::delete('transporte/{transporte}',[TransporteController::class,'destroy'])->name('api.v1.transporte.delete');
 */
 /*Transporte*/
-Route::apiResource('transporte',TransporteController::class)->names('api.v1.tranposte');
+
 /*Category Licencia*/
-Route::apiResource('category_licencia',CategoryLicenciaController::class)->names('api.v1.category_licencia');
+

@@ -17,41 +17,5 @@ class CategoryLicenciaController extends Controller
         ->paginate();
         return CategoryResource::collection($category);
     }
-    public function store(Request $request)
-    {
-        $request->validate([
-            'abreviacion' => 'required'
-        ]);
-        //        return $request->all();
-        $cl = new Category_licencia();
-        $cl->abreviacion = $request->abreviacion;
 
-        $cl->save();
-
-        CategoryResource::make($cl);
-    }
-    public function update(Request $request, $id)
-    {
-        $request->validate([
-            'abreviacion' => 'required'
-        ]);
-        //        return $request->all();
-        $cl = Category_licencia::findOrFail($id);
-        $cl->abreviacion = $request->abreviacion;
-
-        $cl->save();
-
-        return CategoryResource::make($cl);
-    }
-    public function show($id)
-    {
-        $cl = Category_licencia::included()->findOrFail($id);
-        return CategoryResource::make($cl);
-    }
-    public function destroy($id)
-    {
-        $cl = Category_licencia::findOrFail($id);
-        $cl->delete();
-        return CategoryResource::make($cl);
-    }
 }

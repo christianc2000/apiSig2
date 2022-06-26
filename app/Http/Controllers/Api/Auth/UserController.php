@@ -35,11 +35,13 @@ class UserController extends Controller
         $user->category_licencia_id = $request->category_licencia_id;
 
         $user->save();
-
+        $token=$user->createToken("auth_token")->plainTextToken;
+        //si está todo ok
         // return response(UserResource::make($user));
         return response()->json([
             "status" => 1,
-            "msg" => "Alta de usuario exitoso!"
+            "msg" => "Alta de usuario exitoso!",
+            "access_token"=>$token
         ]);
     }
     public function loginget(Request $request)

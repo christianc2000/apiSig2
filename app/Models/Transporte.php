@@ -14,9 +14,9 @@ class Transporte extends Model
     protected $allowFilter = ['id', 'placa', 'modelo', 'linea', 'cantidad_asiento', 'numero_interno', 'fecha_asignacion', 'fecha_baja', 'conductor_id'];
     protected $allowSort = ['id', 'placa', 'modelo', 'linea', 'cantidad_asiento', 'numero_interno', 'fecha_asignacion', 'fecha_baja', 'conductor_id'];
     //relación inversa de 1 a muchos
-    public function conductor()
+    public function user()
     {
-        return $this->belongsTo(Conductor::class);
+        return $this->belongsTo(User::class);
     }
     public function scopeIncluded(Builder $query)
     {

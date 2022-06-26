@@ -36,7 +36,10 @@ class User extends Authenticatable
         'password',
         'category_licencia_id',
     ];
-    
+    //Relación de 1 a muchos
+    public function transportes(){
+        return $this->hasMany(Transporte::class);
+    }
     //relación de 1 a 1
     /* public function conductors(){
         return $this->hasOne(Conductor::class);

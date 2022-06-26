@@ -26,7 +26,7 @@ use App\Http\Controllers\Api\Auth\LoginController;
 /*Usuario */
 //login, register, profile, logout de usuario
 Route::post('register',[UserController::class,'register'])->name('api.v1.register');
-Route::get('login',[UserController::class,'loginget']);
+Route::get('login',[UserController::class,'loginget'])->name('api.v1.login');
 Route::post('login',[UserController::class,'login']);
 Route::group(['middleware'=>["auth:sanctum"]],function(){
     Route::get('user-profile',[UserController::class,'userProfile'])->name('api.v1.userProfile');

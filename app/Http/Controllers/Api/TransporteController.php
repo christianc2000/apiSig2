@@ -13,8 +13,12 @@ class TransporteController extends Controller
 {
     public function index()
     {
-        $transporte=Transporte::paginate()->filter()->sort();
-        return TransporteResource::collection($transporte);
+        $user=Auth()->user();
+      
+        $transporte=$user->transportes;
+        return $transporte;
+        //$transporte=Transporte::paginate()->filter()->sort();
+       // return TransporteResource::collection($transporte);
     }
     public function store(Request $request)
     {
@@ -30,7 +34,7 @@ class TransporteController extends Controller
         ]);
         $user=Auth()->user();
         $transporte = new Transporte();
-
+        
         $transporte->placa = $request->placa;
         $transporte->modelo = $request->modelo;
         $transporte->linea = $request->linea;

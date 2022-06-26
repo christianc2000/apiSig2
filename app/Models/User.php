@@ -17,9 +17,9 @@ class User extends Authenticatable
 
     protected $table = "users";
 
-    protected $allowIncluded = ['conductors', 'conductors.user'];
+/*    protected $allowIncluded = ['conductors', 'conductors.user'];
     protected $allowFilter = ['id', 'name', 'email'];
-    protected $allowSort = ['id', 'name', 'email'];
+    protected $allowSort = ['id', 'name', 'email'];*/
     /**
      * The attributes that are mass assignable.
      *
@@ -42,7 +42,7 @@ class User extends Authenticatable
         return $this->hasOne(Conductor::class);
     }*/
     //************************************************* */
-    public function scopeIncluded(Builder $query)
+  /*  public function scopeIncluded(Builder $query)
     {
         if (empty($this->allowIncluded) || empty(request('included'))) {
             return;
@@ -87,5 +87,5 @@ class User extends Authenticatable
                 $query->orderBy($sortField, $direction);
             }
         }
-    }
+    }*/
 }

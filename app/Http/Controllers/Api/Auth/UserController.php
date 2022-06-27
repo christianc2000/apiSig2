@@ -7,6 +7,7 @@ use App\Http\Resources\UserResource;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -41,7 +42,9 @@ class UserController extends Controller
         return response()->json([
             "status" => 1,
             "msg" => "Alta de usuario exitoso!",
-            "access_token"=>$token
+            "data"=>$user,
+            "access_token"=>$token,
+            "token_type"=>"Bearer"
         ]);
     }
     public function loginget(Request $request)
@@ -68,7 +71,9 @@ class UserController extends Controller
                 return response()->json([
                     "status" => 1,
                     "msg" => "¡Usuario logueado exitosamente!",
-                    "access_token"=>$token
+                    "access_token"=>$token,
+                    "token_type"=>"Bearer",
+                    "date"=>$user
                 ]);
             } else {
                 return response()->json([
@@ -93,10 +98,12 @@ class UserController extends Controller
     }
     public function logout()
     {
+        $user=auth()->user();
         auth()->user()->tokens()->delete();
         return response()->json([
              "status" => 1,
-             "msg"=> "Cierre de Sesión"
+             "msg"=> "Cierre de Sesión",
+             "data"=>$user
         ]);
     }
 }

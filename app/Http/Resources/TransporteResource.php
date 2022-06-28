@@ -23,8 +23,8 @@ class TransporteResource extends JsonResource
             'numero_interno' => $this->numero_interno,
             'fecha_ signacion' => $this->fecha_asignacion,
             'fecha_baja' => $this->fecha_baja,
-            'conductor_id' => $this->conductor_id
-         
+            'user_id' => $this->user_id
+        
         ];
     }
 }

@@ -16,7 +16,12 @@ class TransporteController extends Controller
         $user=Auth()->user();
       
         $transporte=$user->transportes;
-        return $transporte;
+
+        return response()->json([
+            "status" => 1,
+            "msg" => "Lista de transporte",
+            "data" => $transporte
+        ]);
         //$transporte=Transporte::paginate()->filter()->sort();
        // return TransporteResource::collection($transporte);
     }
@@ -44,8 +49,12 @@ class TransporteController extends Controller
        // $transporte->fecha_baja = $request->fecha_baja;
         $transporte->user_id = $user->id;
         $transporte->save();
-        return $transporte;
-        return TransporteResource::make($transporte);
+     
+        return response()->json([
+            "status" => 1,
+            "msg" => "Transporte registrado exitosamente!",
+            "data" => $transporte
+        ]);
     }
     public function update(Request $request, Transporte $transporte)
     {
@@ -73,7 +82,11 @@ class TransporteController extends Controller
         $transporte->user_id = $user->id;
         $transporte->save();
 
-        return TransporteResource::make($transporte);
+        return response()->json([
+            "status" => 1,
+            "msg" => "Transporte actualizado exitosamente!",
+            "data" => $transporte
+        ]);
     }
     public function show($id)
     {

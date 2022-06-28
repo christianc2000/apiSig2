@@ -36,22 +36,22 @@ class UserController extends Controller
         $user->category_licencia_id = $request->category_licencia_id;
 
         $user->save();
-        $token=$user->createToken("auth_token")->plainTextToken;
+        $token = $user->createToken("auth_token")->plainTextToken;
         //si está todo ok
         // return response(UserResource::make($user));
         return response()->json([
             "status" => 1,
-            "msg" => "Alta de usuario exitoso!",
-            "data"=>$user,
-            "access_token"=>$token,
-            "token_type"=>"Bearer"
+            "msg" => "Usuario registrado exitosamente!",
+            "data" => $user,
+            "access_token" => $token,
+            "token_type" => "Bearer"
         ]);
     }
     public function loginget(Request $request)
     {
         return response()->json([
-             "status"=>0,
-             "msg"=>"Necesita logguearse"
+            "status" => 0,
+            "msg" => "Necesita logguearse"
         ]);
     }
     public function login(Request $request)
@@ -63,29 +63,29 @@ class UserController extends Controller
 
         $user = User::where('ci', '=', $request->ci)->first();
         if (isset($user->id)) {
-          
+
             if (Hash::check($request->password, $user->password)) {
                 //creamos el token
-                $token=$user->createToken("auth_token")->plainTextToken;
+                $token = $user->createToken("auth_token")->plainTextToken;
                 //si está todo ok
                 return response()->json([
                     "status" => 1,
                     "msg" => "¡Usuario logueado exitosamente!",
-                    "access_token"=>$token,
-                    "token_type"=>"Bearer",
-                    "date"=>$user
+                    "access_token" => $token,
+                    "token_type" => "Bearer",
+                    "data" => $user
                 ]);
             } else {
                 return response()->json([
                     "status" => 0,
                     "msg" => "La password es incorrecta"
-                ],404);
+                ], 404);
             }
-        }else{
+        } else {
             return response()->json([
                 "status" => 0,
                 "msg" => "Usuario no registrado"
-            ],404);
+            ], 404);
         }
     }
     public function userProfile()
@@ -96,14 +96,46 @@ class UserController extends Controller
             "data" => auth()->user()
         ]);
     }
+
+    public function editProfile(Request $request)
+    {
+        $request->validate([
+            'ci' => 'required|string|unique:users',
+            'name' => 'required',
+            'lastname' => 'required',
+            'fecha_nac' => 'required',
+            'sex' => 'required',
+            'phone' => 'required',
+            'email' => 'required|email|unique:users',
+            'password' => 'required|confirmed',
+            'category_licencia_id' => 'required',
+        ]);
+        $user=auth()->user;
+        $user->ci = $request->ci;
+        $user->name = $request->name;
+        $user->lastname = $request->lastname;
+        $user->fecha_nac = $request->fecha_nac;
+        $user->sex = $request->sex;
+        $user->phone = $request->phone;
+        $user->email = $request->email;
+        $user->password = Hash::make($request->password);
+        $user->category_licencia_id = $request->category_licencia_id;
+
+        $user->save();
+        return response()->json([
+            "status" => 1,
+            "msg" => "Actualización de datos de usuario correctamente!",
+            "data" => $user
+        ]);
+    }
     public function logout()
     {
-        $user=auth()->user();
+        $user = auth()->user();
         auth()->user()->tokens()->delete();
         return response()->json([
-             "status" => 1,
-             "msg"=> "Cierre de Sesión",
-             "data"=>$user
+            "status" => 1,
+            "msg" => "Cierre de Sesión",
+            "data" => $user
         ]);
     }
 }

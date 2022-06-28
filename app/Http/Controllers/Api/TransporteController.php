@@ -42,7 +42,7 @@ class TransporteController extends Controller
         $transporte->numero_interno = $request->numero_interno;
         $transporte->fecha_asignacion = $request->fecha_asignacion;
        // $transporte->fecha_baja = $request->fecha_baja;
-        $transporte->conductor_id = $user->id;
+        $transporte->user_id = $user->id;
         $transporte->save();
         return $transporte;
         return TransporteResource::make($transporte);
@@ -70,7 +70,7 @@ class TransporteController extends Controller
         $transporte->numero_interno = $request->numero_interno;
         $transporte->fecha_asignacion = $request->fecha_asignacion;
         //$transporte->fecha_baja = $request->fecha_baja;
-        $transporte->conductor_id = $user->id;
+        $transporte->user_id = $user->id;
         $transporte->save();
 
         return TransporteResource::make($transporte);

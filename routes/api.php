@@ -29,10 +29,12 @@ Route::post('register',[UserController::class,'register'])->name('api.v1.registe
 Route::get('login',[UserController::class,'loginget'])->name('api.v1.login');
 Route::post('login',[UserController::class,'login']);
 Route::get('category_licencia',[CategoryLicenciaController::class,'index']);
+Route::get('users',[UserController::class,'index']);
 Route::group(['middleware'=>["auth:sanctum"]],function(){
     Route::get('user-profile',[UserController::class,'userProfile'])->name('api.v1.userProfile');
     Route::get('logout',[UserController::class,'logout'])->name('api.v1.logout');    
     Route::apiResource('transporte',TransporteController::class)->names('api.v1.tranposte');
+    Route::put('user-profile',[UserController::class,'editProfile']);
 });
 //Route::apiResource('user',UserController::class)->names('api.v1.user');
 /*Transporte */

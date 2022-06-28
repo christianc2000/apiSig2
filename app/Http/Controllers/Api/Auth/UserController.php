@@ -11,6 +11,16 @@ use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
+    public function index(){
+        $users=User::all();
+        return response()->json([
+            'status'=>1,
+            'msg'=>"Lista de usuarios registrados",
+            'data'=>$users
+        
+        ]);
+          
+    }
     public function register(Request $request)
     {
         $request->validate([
@@ -100,17 +110,17 @@ class UserController extends Controller
     public function editProfile(Request $request)
     {
         $request->validate([
-            'ci' => 'required|string|unique:users',
+            'ci' => 'required|string',
             'name' => 'required',
             'lastname' => 'required',
             'fecha_nac' => 'required',
             'sex' => 'required',
             'phone' => 'required',
-            'email' => 'required|email|unique:users',
+            'email' => 'required|email',
             'password' => 'required|confirmed',
             'category_licencia_id' => 'required',
         ]);
-        $user=auth()->user;
+        $user=auth()->user();
         $user->ci = $request->ci;
         $user->name = $request->name;
         $user->lastname = $request->lastname;
@@ -124,7 +134,7 @@ class UserController extends Controller
         $user->save();
         return response()->json([
             "status" => 1,
-            "msg" => "Actualización de datos de usuario correctamente!",
+            "msg" => "Usuario actualizado correctamente!",
             "data" => $user
         ]);
     }

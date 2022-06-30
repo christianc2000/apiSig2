@@ -19,6 +19,7 @@ class DatabaseSeeder extends Seeder
         
         $this->call(CategoryLicenciaSeeder::class);
         $this->call(UserSeeder::class);
+        $this->call(LineaSeeder::class);
         $this->call(TransporteSeeder::class);
         
         // \App\Models\User::factory()->create([

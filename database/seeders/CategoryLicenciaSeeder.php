@@ -16,16 +16,13 @@ class CategoryLicenciaSeeder extends Seeder
     public function run()
     {
         Category_licencia::create([
-            'abreviacion'=>'P',
+            'abreviacion'=>'B',//PROFESIONAL B
         ]);
         Category_licencia::create([
-            'abreviacion'=>'A',
+            'abreviacion'=>'C',//PROFESIONAL C
         ]);
         Category_licencia::create([
-            'abreviacion'=>'B',
-        ]);
-        Category_licencia::create([
-            'abreviacion'=>'C',
+            'abreviacion'=>'T', //MOTORISTA
         ]);
 
     }

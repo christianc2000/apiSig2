@@ -17,12 +17,12 @@ return new class extends Migration
             $table->id();
             $table->string('placa');
             $table->string('modelo');
-            $table->unsignedInteger('linea');
             $table->unsignedInteger('cantidad_asiento');
             $table->unsignedInteger('numero_interno');
             $table->date('fecha_asignacion');
             $table->date('fecha_baja')->nullable();
             $table->foreignId('user_id')->references('id')->on('users');
+            $table->foreignId('linea_id')->references('id')->on('lineas');
             $table->timestamps();
         });
     }

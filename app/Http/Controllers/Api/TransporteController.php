@@ -91,8 +91,10 @@ class TransporteController extends Controller
     public function show($id)
     {
         $transporte = Transporte::findOrFail($id);
-
-        return TransporteResource::make($transporte);
+        return response()->json([
+            "status" => 1,
+            "data" => $transporte
+        ]);
     }
     public function destroy($id)
     {

@@ -18,6 +18,11 @@ class Transporte extends Model
     {
         return $this->belongsTo(User::class);
     }
+    public function linea(){
+        return $this->belongsTo(Linea::class);
+    }
+
+    //********************************************** */
     public function scopeIncluded(Builder $query)
     {
         if (empty($this->allowIncluded) || empty(request('included'))) {

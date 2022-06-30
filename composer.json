@@ -11,6 +11,7 @@
         "laravel/passport": "^10.4",
         "laravel/sanctum": "^2.15",
         "laravel/tinker": "^2.7",
+        "league/flysystem-aws-s3-v3": "3.0",
         "symfony/psr-http-message-bridge": "^2.1"
     },
     "require-dev": {

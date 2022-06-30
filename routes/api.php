@@ -1,12 +1,13 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\RegisterController;
 use App\Http\Controllers\Api\TransporteController;
 use App\Http\Controllers\Api\CategoryLicenciaController;
 use App\Http\Controllers\Api\Auth\UserController;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Api\Auth\LoginController;
+use App\Http\Controllers\Api\LineaController;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -29,7 +30,9 @@ Route::post('register',[UserController::class,'register'])->name('api.v1.registe
 Route::get('login',[UserController::class,'loginget'])->name('api.v1.login');
 Route::post('login',[UserController::class,'login']);
 Route::get('category_licencia',[CategoryLicenciaController::class,'index']);
-Route::get('users',[UserController::class,'index']);
+Route::get('user',[UserController::class,'index']);
+Route::get('lineas',[LineaController::class,'index'])->name('api1.v1.lineas');
+
 Route::group(['middleware'=>["auth:sanctum"]],function(){
     Route::get('user-profile',[UserController::class,'userProfile'])->name('api.v1.userProfile');
     Route::get('logout',[UserController::class,'logout'])->name('api.v1.logout');    

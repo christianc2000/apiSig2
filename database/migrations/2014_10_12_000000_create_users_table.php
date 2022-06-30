@@ -19,9 +19,10 @@ return new class extends Migration
             $table->string('name');
             $table->string('lastname');
             $table->date('fecha_nac');
-            $table->char('sex');
+            $table->string('sex',1);
             $table->string('phone');
             $table->string('email')->unique();
+            $table->string('image')->nullable();
             $table->string('password');
             $table->foreignId('category_licencia_id')->references('id')->on('category_licencias');
             $table->timestamps();

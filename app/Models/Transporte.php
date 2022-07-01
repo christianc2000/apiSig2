@@ -18,8 +18,8 @@ class Transporte extends Model
     {
         return $this->belongsTo(User::class);
     }
-    public function linea(){
-        return $this->belongsTo(Linea::class);
+    public function lineas(){
+        return $this->belongsTo(Linea::class,'id','linea');
     }
 
     //********************************************** */

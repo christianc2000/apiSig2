@@ -26,7 +26,7 @@ class TransporteSeeder extends Seeder
                 'fecha_asignacion' => "2022-01-03",
                 'fecha_baja' => "2022-06-18",
                 'user_id' => 1,
-                'linea_id' => $l->id,
+                'linea' => $l->id,
             ]
         );
 

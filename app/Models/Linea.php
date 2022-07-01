@@ -11,6 +11,6 @@ class Linea extends Model
     protected $protected = ['id', 'created_at', 'updated_at'];
 //relación de 1 a muchos
     public function transportes(){
-        return $this->hasMany(Transporte::class);
+        return $this->hasMany(Transporte::class,'linea');
     }
 }

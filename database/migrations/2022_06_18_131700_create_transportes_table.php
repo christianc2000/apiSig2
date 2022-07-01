@@ -22,7 +22,8 @@ return new class extends Migration
             $table->date('fecha_asignacion');
             $table->date('fecha_baja')->nullable();
             $table->foreignId('user_id')->references('id')->on('users');
-            $table->foreignId('linea_id')->references('id')->on('lineas');
+            $table->unsignedBigInteger('linea');
+            $table->foreign('linea')->references('id')->on('lineas');
             $table->timestamps();
         });
     }

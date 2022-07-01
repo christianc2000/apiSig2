@@ -31,7 +31,7 @@ class TransporteController extends Controller
         $request->validate([
             'placa' => 'required|string|max:15',
             'modelo' => 'required',
-            'linea_id' => 'required',
+            'linea' => 'required',
             'cantidad_asiento' => 'required',
             'numero_interno' => 'required',
             'fecha_asignacion' => 'required',
@@ -43,7 +43,7 @@ class TransporteController extends Controller
         
         $transporte->placa = $request->placa;
         $transporte->modelo = $request->modelo;
-        $transporte->linea_id = $request->linea_id;
+        $transporte->linea = $request->linea;
         $transporte->cantidad_asiento = $request->cantidad_asiento;
         $transporte->numero_interno = $request->numero_interno;
         $transporte->fecha_asignacion = $request->fecha_asignacion;
@@ -62,7 +62,7 @@ class TransporteController extends Controller
         $request->validate([
             'placa' => 'required',
             'modelo' => 'required',
-            'linea_id' => 'required',
+            'linea' => 'required',
             'cantidad_asiento' => 'required',
             'numero_interno' => 'required',
             'fecha_asignacion' => 'required',
@@ -75,7 +75,7 @@ class TransporteController extends Controller
         $user=Auth()->user();
         $transporte->placa = $request->placa;
         $transporte->modelo = $request->modelo;
-        $transporte->linea_id = $request->linea_id;
+        $transporte->linea = $request->linea;
         $transporte->cantidad_asiento = $request->cantidad_asiento;
         $transporte->numero_interno = $request->numero_interno;
         $transporte->fecha_asignacion = $request->fecha_asignacion;

@@ -43,7 +43,7 @@ class TransporteController extends Controller
         
         $transporte->placa = $request->placa;
         $transporte->modelo = $request->modelo;
-        $transporte->linea = $request->linea;
+        $transporte->linea_id = $request->linea_id;
         $transporte->cantidad_asiento = $request->cantidad_asiento;
         $transporte->numero_interno = $request->numero_interno;
         $transporte->fecha_asignacion = $request->fecha_asignacion;
@@ -75,7 +75,7 @@ class TransporteController extends Controller
         $user=Auth()->user();
         $transporte->placa = $request->placa;
         $transporte->modelo = $request->modelo;
-        $transporte->linea = $request->linea;
+        $transporte->linea_id = $request->linea_id;
         $transporte->cantidad_asiento = $request->cantidad_asiento;
         $transporte->numero_interno = $request->numero_interno;
         $transporte->fecha_asignacion = $request->fecha_asignacion;

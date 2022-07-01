@@ -37,7 +37,7 @@ class TransporteController extends Controller
             'fecha_asignacion' => 'required',
            
         ]);
-        return $request;
+       
         $user=Auth()->user();
         $transporte = new Transporte();
         
@@ -101,6 +101,10 @@ class TransporteController extends Controller
     {
         $transporte = Transporte::findOrFail($id);
         $transporte->delete();
-        return TransporteResource::make($transporte);
+        return response()->json([
+            "status"=>1,
+            "msg"=>"Transporte eliminado exitosamente",
+            "data"=>$transporte
+        ]);
     }
 }

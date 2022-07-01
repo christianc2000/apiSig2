@@ -18,42 +18,42 @@ class LineaSeeder extends Seeder
     {
         Linea::create([
             'linea'=>1,
-            'image'=>'/storage/imagenes/perfil/linea1.png'
+            'image'=>'public/lineas/linea1.png'
         ]);
         Linea::create([
             'linea'=>2,
-            'image'=>'/storage/imagenes/perfil/linea2.png'
+            'image'=>'public/lineas/linea2.png'
         ]);
         Linea::create([
             'linea'=>5,
-            'image'=>'/storage/imagenes/perfil/linea5.png'
+            'image'=>'public/lineas/linea5.png'
         ]);
         Linea::create([
             'linea'=>8,
-            'image'=>'/storage/imagenes/perfil/linea8.png'
+            'image'=>'public/lineas/linea8.png'
         ]);
         Linea::create([
             'linea'=>9,
-            'image'=>'/storage/imagenes/perfil/linea9.png'
+            'image'=>'public/lineas/linea9.png'
         ]);Linea::create([
             'linea'=>10,
-            'image'=>'/storage/imagenes/perfil/linea10.png'
+            'image'=>'public/lineas/linea10.png'
         ]);
         Linea::create([
             'linea'=>11,
-            'image'=>'/storage/imagenes/perfil/linea11.png'
+            'image'=>'public/lineas/linea11.png'
         ]);
         Linea::create([
             'linea'=>16,
-            'image'=>'/storage/imagenes/perfil/linea16.png'
+            'image'=>'public/lineas/linea16.png'
         ]);
         Linea::create([
             'linea'=>17,
-            'image'=>'/storage/imagenes/perfil/linea17.png'
+            'image'=>'public/lineas/linea17.png'
         ]);
         Linea::create([
             'linea'=>18,
-            'image'=>'/storage/imagenes/perfil/linea18.png'
+            'image'=>'public/lineas/linea18.png'
         ]);
     }
 }

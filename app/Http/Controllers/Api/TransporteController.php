@@ -31,12 +31,13 @@ class TransporteController extends Controller
         $request->validate([
             'placa' => 'required|string|max:15',
             'modelo' => 'required',
-            'linea' => 'required',
+            'linea_id' => 'required',
             'cantidad_asiento' => 'required',
             'numero_interno' => 'required',
             'fecha_asignacion' => 'required',
            
         ]);
+        return $request;
         $user=Auth()->user();
         $transporte = new Transporte();
         
